@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Test deCONZ.
+
+set -Eeuo pipefail
+
+cd "$(dirname "$0")/.."
+
+. ./.env
+
+curl -fsSL -D - -o /dev/null "localhost:$DECONZ_WEB_PORT"

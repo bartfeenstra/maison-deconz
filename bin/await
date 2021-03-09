@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+cd "$(dirname "$0")/.."
+
+. ./.env
+
+./vendor/wait-for-it "localhost:$DECONZ_WEB_PORT"

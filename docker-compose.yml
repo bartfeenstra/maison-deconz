@@ -1,0 +1,19 @@
+version: '3.4'
+services:
+  deconz:
+    image: marthoc/deconz:stable
+    container_name: maison_deconz
+    restart: always
+    network_mode: host
+    volumes:
+    - '/etc/localtime:/etc/localtime:ro'
+    - './data/deconz:/root/.local/share/dresden-elektronik/deCONZ'
+    # The USB device we need can be (un)mounted at any time, and as any /dev/ttyUSB* device. Because we trust this
+    # container, we run it in privileged mode and allow access to any device, so we can choose the right one runtime.
+    privileged: true
+    environment:
+      TZ: Europe/London
+      DECONZ_VNC_MODE: 0
+      DECONZ_DEVICE: "${DECONZ_DEVICE}"
+      DECONZ_WEB_PORT: "${DECONZ_WEB_PORT}"
+      DECONZ_WS_PORT: "${DECONZ_WS_PORT}"
